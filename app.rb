@@ -4,6 +4,7 @@ require "pry-byebug"
 require "better_errors"
 require_relative "cookbook"
 require_relative "recipe"
+require_relative "scraping"
 
 csv_file   = File.join(__dir__, 'recipes.csv')
 cookbook   = Cookbook.new(csv_file)
@@ -32,4 +33,9 @@ get '/delete/:id' do
   index = @params[:id].to_i - 1
   cookbook.remove_recipe(index)
   redirect '/'
+end
+
+get '/search' do
+  @results = scrape(params[:q]) if params[:q]
+  erb :search
 end
