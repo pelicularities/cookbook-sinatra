@@ -1,0 +1,8 @@
+<% @recipes.each_with_index do |recipe, index| %>
+  <% id = index + 1 %>
+  <div>
+    <h2><%= recipe.name %></h2>
+    <p>[<a href="/delete/<%=id%>">delete this recipe</a>]</p>
+    <p><%= recipe.description %></p>
+  </div>
+<% end %>
